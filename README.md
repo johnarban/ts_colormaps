@@ -8,7 +8,7 @@ A comprehensive collection of matplotlib colormaps converted to TypeScript, incl
 
 Visit the [interactive preview](https://your-username.github.io/ts_colormaps/) to browse all available colormaps with search functionality.
 
-## � Usage in Vue/TypeScript Projects
+## � Usage in Vue/types.jscript Projects
 
 ### Direct Import from GitHub
 

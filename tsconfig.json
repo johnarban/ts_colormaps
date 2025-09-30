@@ -39,11 +39,13 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "src/utils.ts"  ],
   "exclude": [
     "node_modules",
     "dist",
     "**/*.test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "src/all_colormaps/**/*",
+    "src/selected_colormaps/**/*"
   ]
 }

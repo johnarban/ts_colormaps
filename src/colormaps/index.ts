@@ -823,7 +823,7 @@ import { cet_cyclic_mygbm_50_90_c46_s25 } from "./cet_cyclic_mygbm_50_90_c46_s25
 import { cet_cyclic_mygbm_50_90_c46_s25_r } from "./cet_cyclic_mygbm_50_90_c46_s25_r.js";
 import { cet_CET_C8s } from "./cet_CET_C8s.js";
 import { cet_CET_C8s_r } from "./cet_CET_C8s_r.js";
-import type { ColorMaps } from "../types";
+import type { ColorMaps } from "../types.js";
 
 export const colormaps: ColorMaps = {
 
