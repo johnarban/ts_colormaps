@@ -5,9 +5,9 @@
     "outDir": "./dist",
 
     // Environment Settings
-    "module": "ESNext",
+    "module": "Node16",
     "target": "ES2022",
-    "moduleResolution": "node",
+    "moduleResolution": "Node16",
     "lib": ["ES2022"],
     "types": ["node"],
 
@@ -29,7 +29,6 @@
 
     // Recommended Options
     "strict": true,
-    "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
