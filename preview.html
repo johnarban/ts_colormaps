@@ -285,8 +285,8 @@
 
         <div class="content">
             <div class="search-container">
-                <input type="text" id="search-box" class="search-box" placeholder="Search colormaps... (e.g., 'viridis', 'fire', 'ocean')" />
-                <div class="search-info">Type to search across all colormaps - order of letters doesn't matter!</div>
+                <input type="text" id="search-box" class="search-box" placeholder="Search colormaps... (e.g., 'viridis', 'fire', 'ocean' or \"cmr\" for exact match)" />
+                <div class="search-info">Type to search across all colormaps - order of letters doesn't matter! Use quotes for exact matches.</div>
             </div>
             <div id="colormaps-container"></div>
         </div>
@@ -350,10 +350,18 @@
         // Show loading state initially
         container.innerHTML = '<div style="padding: 40px; text-align: center; color: #6c757d;"><div style="font-size: 1.2em; margin-bottom: 10px;">Loading colormaps...</div><div style="font-size: 0.9em;">This may take a moment</div></div>';
 
-        // Fuzzy search function - order independent matching
+        // Fuzzy search function - order independent matching with exact search support
         function fuzzyMatch(query, text) {
             if (!query) return true;
             
+            // Check for exact search (quoted strings)
+            const quotedMatch = query.match(/^"(.+)"$/);
+            if (quotedMatch) {
+                const exactQuery = quotedMatch[1].toLowerCase();
+                return text.toLowerCase().includes(exactQuery);
+            }
+            
+            // Regular fuzzy search (order independent)
             const queryLower = query.toLowerCase().replace(/[^a-z0-9]/g, '');
             const textLower = text.toLowerCase().replace(/[^a-z0-9]/g, '');
             
