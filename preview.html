@@ -107,19 +107,10 @@
 
         summary::marker {
             display: none;
-        }
-
-        summary::before {
-            content: '▶';
-            display: inline-block;
-            margin-right: 12px;
             transition: transform 0.3s ease;
-            font-size: 0.9em;
         }
 
-        details[open] summary::before {
-            transform: rotate(90deg);
-        }
+ 
 
         .category-description {
             padding: 15px 25px;
@@ -294,6 +285,10 @@
         <div class="stats">
             <div>Total colormaps: <span id="total-count">0</span></div>
             <div>Organized by usage categories</div>
+        </div>
+        
+        <div style="text-align: center; padding: 20px; color: #6c757d; font-size: 0.8rem; border-top: 1px solid #e1e8ed; background: #f8f9fa;">
+            This preview page was generated using VS Code Copilot (Claude Sonnet 4 - Agent mode)
         </div>
     </div>
 
@@ -524,7 +519,7 @@
                 section.className = 'category-section';
 
                 const details = document.createElement('details');
-                details.open = true;
+                details.open = false;
 
                 const summary = document.createElement('summary');
                 summary.innerHTML = `${categoryName} <span class="category-count">${categoryColormaps.length}</span>`;
