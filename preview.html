@@ -156,14 +156,10 @@
             height: 60px;
             position: relative;
             overflow: hidden;
-        }
-
-        .color-segment {
-            height: 100%;
             transition: opacity 0.2s ease;
         }
 
-        .colormap-strip:hover .color-segment {
+        .colormap-strip:hover {
             opacity: 0.8;
         }
 
@@ -384,29 +380,28 @@
             const strip = document.createElement('div');
             strip.className = 'colormap-strip';
 
-            // Generate color segments using the colormap data
+            // Generate linear gradient using all available colormap data points
             const rValues = colormap.r;
             const gValues = colormap.g;
             const bValues = colormap.b;
-            const numPoints = Math.min(rValues.length, nColors);
+            const numPoints = rValues.length;
 
-            for (let i = 0; i < nColors; i++) {
-                const index = Math.floor((i / (nColors - 1)) * (numPoints - 1));
-                const r = Math.round(rValues[index] * 255);
-                const g = Math.round(gValues[index] * 255);
-                const b = Math.round(bValues[index] * 255);
-
-                const segment = document.createElement('div');
-                segment.className = 'color-segment';
-                segment.style.width = `${100 / nColors}%`;
-                segment.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                
-                strip.appendChild(segment);
+            // Create gradient stops for all data points
+            const gradientStops = [];
+            for (let i = 0; i < numPoints; i++) {
+                const percentage = (i / (numPoints - 1)) * 100;
+                const r = Math.round(rValues[i] * 255);
+                const g = Math.round(gValues[i] * 255);
+                const b = Math.round(bValues[i] * 255);
+                gradientStops.push(`rgb(${r}, ${g}, ${b}) ${percentage}%`);
             }
+
+            // Apply the linear gradient as background
+            strip.style.background = `linear-gradient(to right, ${gradientStops.join(', ')})`;
 
             const info = document.createElement('div');
             info.className = 'colormap-info';
-            info.textContent = `${rValues.length} colors`;
+            info.textContent = `${numPoints} colors`;
 
             // Create actions section with download and copy buttons
             const actions = document.createElement('div');
