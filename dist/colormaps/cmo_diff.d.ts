@@ -1,0 +1,14 @@
+import type { ColorMap } from "../types.js";
+export declare const cmo_diff: ColorMap;
+export declare const cmo_diff_esri: {
+    type: string;
+    colorRamps: {
+        type: string;
+        fromColor: number[];
+        toColor: number[];
+        algorithm: string;
+        start: number;
+        stop: number;
+    }[];
+};
+//# sourceMappingURL=cmo_diff.d.ts.map

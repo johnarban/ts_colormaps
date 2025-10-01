@@ -1,0 +1,14 @@
+import type { ColorMap } from "../types.js";
+export declare const cet_CET_D6: ColorMap;
+export declare const cet_CET_D6_esri: {
+    type: string;
+    colorRamps: {
+        type: string;
+        fromColor: number[];
+        toColor: number[];
+        algorithm: string;
+        start: number;
+        stop: number;
+    }[];
+};
+//# sourceMappingURL=cet_CET_D6.d.ts.map
