@@ -1,0 +1,44 @@
+{
+  "name": "ts_colormaps",
+  "version": "1.0.0",
+  "description": "matplotlib colormaps in typescript",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "prepack": "npm run build",
+    "preview": "npm run build && node preview-server.js",
+    "preview:watch": "npm run build && concurrently \"npm run dev\" \"node preview-server.js\"",
+    "preview:dev": "npm run preview:watch"
+  },
+  "keywords": [
+    "colormap",
+    "matplotlib",
+    "typescript",
+    "visualization",
+    "colors"
+  ],
+  "author": "@astrojthe3",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
