@@ -1,15 +1,16 @@
 import type { ColorMap, ColorMapChannels } from "./types.js";
 
 function toHexComponent(value: number): string {
-  return Math.round(value * 255).toString(16).padStart(2, "0");
+  const channel = Math.min(255, Math.max(0, Math.round(value * 255)));
+  return channel.toString(16).padStart(2, "0");
 }
 
 export function toHexList({ r, g, b }: ColorMapChannels): string[] {
-  return r.map((red, index) => {
-    const green = g[index] ?? 0;
-    const blue = b[index] ?? 0;
-    return `#${toHexComponent(red)}${toHexComponent(green)}${toHexComponent(blue)}`;
-  });
+  if (r.length !== g.length || r.length !== b.length) {
+    throw new Error("Color map channels must have matching lengths");
+  }
+
+  return r.map((red, index) => `#${toHexComponent(red)}${toHexComponent(g[index] as number)}${toHexComponent(b[index] as number)}`);
 }
 
 export function createColorMap(channels: ColorMapChannels): ColorMap {
