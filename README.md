@@ -46,22 +46,13 @@ import { Greys } from 'https://raw.githubusercontent.com/your-username/ts_colorm
 
 const colors = ref<string[]>([]);
 
-function rgbToHex(r: number, g: number, b: number): string {
-  const toHex = (n: number) => Math.round(n * 255).toString(16).padStart(2, '0');
-  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-}
-
 function generateColors() {
   const numColors = 50;
   const newColors: string[] = [];
   
   for (let i = 0; i < numColors; i++) {
     const index = Math.floor((i / (numColors - 1)) * (Greys.r.length - 1));
-    const hex = rgbToHex(
-      Greys.r[index],
-      Greys.g[index],
-      Greys.b[index]
-    );
+    const hex = Greys.colormapHex[index];
     newColors.push(hex);
   }
   
