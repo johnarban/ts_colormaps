@@ -51,13 +51,13 @@ def sanitize_cmap_name(cmap_name):
 def generate_typescript_file(cmap_name, r_values, g_values, b_values):
     sanitized_cmap_name = sanitize_cmap_name(cmap_name)
     """Generate TypeScript file for a single colormap with default export structure"""
-    ts_content = f'''import type {{ ColorMap }} from "../types.js";
+    ts_content = f'''import {{ createColorMap }} from "../colorMap.js";
 
-const colormap: ColorMap = {{
+const colormap = createColorMap({{
   r: {list(r_values)},
   g: {list(g_values)},
   b: {list(b_values)},
-}};
+}});
 
 // ESRI color ramp will be added here by append_as_esri_colorramp function
 
@@ -413,4 +413,3 @@ for cmap_name, ts_file in generated_files:
     r, g, b = read_ts_colormap_file(ts_file)
     append_as_esri_colorramp(ts_file, sanitize_cmap_name(cmap_name) + '_esri', (r, g, b), N=22)
     # print(f"Appended ESRI color ramp to: {ts_file}")
-

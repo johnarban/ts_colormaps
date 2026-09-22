@@ -46,22 +46,13 @@ import { Greys } from 'https://raw.githubusercontent.com/your-username/ts_colorm
 
 const colors = ref<string[]>([]);
 
-function rgbToHex(r: number, g: number, b: number): string {
-  const toHex = (n: number) => Math.round(n * 255).toString(16).padStart(2, '0');
-  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-}
-
 function generateColors() {
   const numColors = 50;
   const newColors: string[] = [];
   
   for (let i = 0; i < numColors; i++) {
     const index = Math.floor((i / (numColors - 1)) * (Greys.r.length - 1));
-    const hex = rgbToHex(
-      Greys.r[index],
-      Greys.g[index],
-      Greys.b[index]
-    );
+    const hex = Greys.hex[index];
     newColors.push(hex);
   }
   
@@ -146,21 +137,17 @@ export interface ColorMap {
   r: number[];
   g: number[];
   b: number[];
+  hex: string[];
 }
 
-// Convert colormap to hex colors
+// Colormaps now export a precomputed hex list
 export function colormapToHex(colormap: ColorMap, steps: number = 256): string[] {
   const colors: string[] = [];
   
   for (let i = 0; i < steps; i++) {
     const t = i / (steps - 1);
     const index = Math.floor(t * (colormap.r.length - 1));
-    
-    const r = Math.round(colormap.r[index] * 255);
-    const g = Math.round(colormap.g[index] * 255);
-    const b = Math.round(colormap.b[index] * 255);
-    
-    colors.push(`#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`);
+    colors.push(colormap.hex[index]);
   }
   
   return colors;
