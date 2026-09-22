@@ -5,6 +5,7 @@ from pathlib import Path
 import matplotlib.colors as mcolors
 import matplotlib.cm as mcm
 from IPython.display import display, Image
+import json
 import cmocean
 import cmasher
 import colorcet
@@ -48,21 +49,34 @@ def sanitize_cmap_name(cmap_name):
         sanitized = '_' + sanitized
     return sanitized
 
+def rgb_to_hex_list(r_values, g_values, b_values):
+    def to_hex_component(value):
+        return f"{max(0, min(255, round(value * 255))):02x}"
+
+    return [
+        f"#{to_hex_component(r)}{to_hex_component(g)}{to_hex_component(b)}"
+        for r, g, b in zip(r_values, g_values, b_values)
+    ]
+
 def generate_typescript_file(cmap_name, r_values, g_values, b_values):
     sanitized_cmap_name = sanitize_cmap_name(cmap_name)
+    colormap_hex = rgb_to_hex_list(r_values, g_values, b_values)
     """Generate TypeScript file for a single colormap with default export structure"""
-    ts_content = f'''import {{ createColorMap }} from "../colorMap.js";
+    ts_content = f'''import type {{ ColorMap }} from "../types.js";
 
-const colormap = createColorMap({{
+const colormap: ColorMap = {{
   r: {list(r_values)},
   g: {list(g_values)},
   b: {list(b_values)},
-}});
+}};
+
+const colormapHex: string[] = {json.dumps(colormap_hex)};
 
 // ESRI color ramp will be added here by append_as_esri_colorramp function
 
 export default {{
   colormap,
+  colormapHex,
   esri: null as any // Will be replaced with actual ESRI data
 }};
 '''

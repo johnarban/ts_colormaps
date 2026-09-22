@@ -1,26 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { createColorMap } from "../dist/colorMap.js";
+import viridis from "../dist/colormaps/viridis.js";
 
-test("createColorMap adds a hex list", () => {
-  const colorMap = createColorMap({
-    r: [0, 1],
-    g: [0.5, 0],
-    b: [1, 0.5],
-  });
-
-  assert.deepEqual(colorMap.hex, ["#0080ff", "#ff0080"]);
-});
-
-test("createColorMap rejects mismatched channel lengths", () => {
-  assert.throws(
-    () =>
-      createColorMap({
-        r: [0, 1],
-        g: [0.5],
-        b: [1, 0.5],
-      }),
-    /Color map channels must have matching lengths/,
-  );
+test("viridis exports a separate colormapHex list", () => {
+  assert.equal("hex" in viridis.colormap, false);
+  assert.equal(viridis.colormapHex.length, viridis.colormap.r.length);
+  assert.equal(viridis.colormapHex[0], "#440154");
+  assert.equal(viridis.colormapHex[viridis.colormapHex.length - 1], "#fde725");
 });
