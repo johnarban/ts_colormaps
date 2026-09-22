@@ -10,7 +10,16 @@ export function toHexList({ r, g, b }: ColorMapChannels): string[] {
     throw new Error("Color map channels must have matching lengths");
   }
 
-  return r.map((red, index) => `#${toHexComponent(red)}${toHexComponent(g[index] as number)}${toHexComponent(b[index] as number)}`);
+  return r.map((red, index) => {
+    const green = g[index];
+    const blue = b[index];
+
+    if (green === undefined || blue === undefined) {
+      throw new Error("Color map channels must have matching lengths");
+    }
+
+    return `#${toHexComponent(red)}${toHexComponent(green)}${toHexComponent(blue)}`;
+  });
 }
 
 export function createColorMap(channels: ColorMapChannels): ColorMap {
