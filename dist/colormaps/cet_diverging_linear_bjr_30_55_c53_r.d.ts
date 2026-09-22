@@ -1,0 +1,18 @@
+import type { ColorMap } from "../types.js";
+declare const _default: {
+    colormap: ColorMap;
+    colormapHex: string[];
+    esri: {
+        type: string;
+        colorRamps: {
+            type: string;
+            fromColor: number[];
+            toColor: number[];
+            algorithm: string;
+            start: number;
+            stop: number;
+        }[];
+    };
+};
+export default _default;
+//# sourceMappingURL=cet_diverging_linear_bjr_30_55_c53_r.d.ts.map

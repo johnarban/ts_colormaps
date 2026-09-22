@@ -1,0 +1,18 @@
+import type { ColorMap } from "../types.js";
+declare const _default: {
+    colormap: ColorMap;
+    colormapHex: string[];
+    esri: {
+        type: string;
+        colorRamps: {
+            type: string;
+            fromColor: number[];
+            toColor: number[];
+            algorithm: string;
+            start: number;
+            stop: number;
+        }[];
+    };
+};
+export default _default;
+//# sourceMappingURL=cmr_amethyst.d.ts.map
